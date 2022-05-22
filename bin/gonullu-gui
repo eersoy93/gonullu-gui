@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+# Gonullu GUI running script
+#
+# Copyright 2016 mbusb (https://github.com/mbusb/)
+#           2017 mbusb (https://github.com/mbusb/)
+#                Gautier Pelloux-Prayer (a.k.a. bagage)
+#                                       (https://github.com/bagage)
+#                Erdem Ersoy (erdemersoy@live.com)
+#
+# This file has been taken from multibootusb project and altered for
+# Gonullu GUI, so this file licensed by GPLv2. For GPLv2, see LICENSE_2 file
+# in Gonullu GUI source code.
+#
+
+# If pkexec command exists, (1) be run if gonulu-gui command in /usr/bin or (2) be run if gonulu-gui command in /usr/local/bin. If pkexec command doesn't exist, (3) be run if gonulu-gui command in /usr/bin or (4) be run if gonulu-gui command in /usr/local/bin.
+
+
+if [ $(which pkexec) ]; then
+    if [ -f /usr/bin/gonullu-gui ]; then
+        pkexec --disable-internal-agent "/usr/bin/gonullu-gui-main" "$@" #(1)
+    fi
+
+    if [ -f /usr/local/bin/gonullu-gui ]; then
+        pkexec --disable-internal-agent "/usr/local/bin/gonullu-gui-main" "$@" #(2)
+    fi
+else
+    if [ -f /usr/bin/gonullu-gui ]; then
+        /usr/bin/gonullu-gui-main "$@" #(3)
+    fi
+
+    if [ -f /usr/local/bin/gonullu-gui ]; then
+        /usr/local/bin/gonullu-gui-main "$@" #(4)
+    fi
+fi

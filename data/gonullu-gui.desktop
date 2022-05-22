@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Gonullu Graphical User Interface
+Name[tr]=Gonullu Grafik Kullanıcı Arayüzü
+GenericName=Pisi GNU/Linux automatic build system
+GenericName[tr]=Pisi GNU/Linux otomatik inşâ sistemi
+Comment=Contribute to building Pisi GNU/Linux packages
+Comment[tr]=Pisi GNU/Linux paketlerini inşâ etmeye katkıda bulunun
+Exec=gonullu-gui
+Terminal=false
+Categories=Development;Qt;Utility;
+StartupNotify=true

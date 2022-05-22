@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+    <vendor>Gonullu Graphical User Interface</vendor>
+    <vendor_url>https://github.com/eersoy93/gonullu-gui</vendor_url>
+    <action id="org.freedesktop.policykit.pkexec.gonullu-gui">
+        <description>Run Gonullu Graphical User Interface (gonullu-gui-main)</description>
+        <description xml:lang="tr">Gonullu Grafik Kullanıcı Arayüzü'nü (gonullu-gui-main) çalıştır</description>
+        <message>Authentication is required to run the Gonullu Graphical User Interface (gonullu-gui-main)</message>
+        <message xml:lang="tr">Gonullu Grafik Kullanıcı Arayüzü'nü (gonullu-gui-main) çalıştırmak için yetkilendirme gerekir</message>
+    <!--<icon_name></icon_name>-->
+        <defaults>
+            <allow_any>auth_admin</allow_any>
+            <allow_inactive>auth_admin</allow_inactive>
+            <allow_active>auth_admin</allow_active>
+        </defaults>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/gonullu-gui-main</annotate>
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+    </action>
+</policyconfig>

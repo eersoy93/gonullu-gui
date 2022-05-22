@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+#
+#  Gonullu GUI main running script
+#
+#  Copyright 2017 Erdem Ersoy (erdemersoy@live.com)
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#
+
+# Imports modules
+from PyQt5.QtWidgets import QApplication, QMessageBox
+from PyQt5.QtCore import QCoreApplication, QLocale, QTranslator
+from gonullugui.coreui import launchingWindow  # , resource
+from distro import linux_distribution
+import sys
+import os
+
+
+# Main program routine
+if __name__ == "__main__":
+
+    # Makes Qt application instance for running the application.
+    app = QApplication(sys.argv)
+
+    # Sets locale and translation
+    locale = QLocale.system().name()
+    translator = QTranslator(app)
+    if (linux_distribution()[0] == "PisiLinux"):  # Pisi GNU/Linux detection
+        translator.load("/usr/share/gonullu-gui/langs/{}.qm".format(locale))
+    else:
+        translator.load("/usr/local/share/gonullu-gui/langs/{}.qm"
+                        .format(locale))
+    app.installTranslator(translator)
+
+    # Detects whether the user is running the program is root
+    if os.getuid() != 0:
+        runAsRootMsgBox = QMessageBox()
+        runAsRootMsgBox.warning(
+            None,
+            QCoreApplication.translate(
+                "__main__",
+                "Gonullu Graphical User Interface"),
+            QCoreApplication.translate(
+                "__main__",
+                "Gonullu Graphical User Interface must be run as root."),
+            QMessageBox.Ok)
+        app.quit()
+    else:
+        ex = launchingWindow()
+        ex.show()
+        sys.exit(app.exec_())
